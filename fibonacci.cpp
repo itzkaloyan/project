@@ -1,17 +1,25 @@
 #include <iostream>
 using namespace std;
 
-int main(){
+void function() {
 
-    int n1, n2, n3, elements,i;
-    cout<<"Number of elements";
-    cin>>elements;
-    for(i=0;i<elements;i++)
-    {
+    int number;
+    cout << "Enter Number\n";
+    cin >> number;
+    int n1 = 0;
+    int n2 = 1;
+    int n3;
+    
+    for(int i=0; i < number - 1; ++i) {
         n3=n1+n2;
-        cout<<n3;
         n1=n2;
         n2=n3;
     }
+    cout<<n3<<endl;
+}
+
+int main() {
+    
+    function();
     return 0;
 }
