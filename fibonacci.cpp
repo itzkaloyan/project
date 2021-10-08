@@ -1,32 +1,30 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define DATA_SIZE 1000
 int main()
 {
-    char data[DATA_SIZE];
     FILE * fptr;
     fptr = fopen("test.txt", "r");
-
     if(fptr == NULL)
     {
         printf("Unable to create file.\n");
         exit(EXIT_FAILURE);
     }
-    printf("Enter contents to store in file:\n");
-    fgets(data, DATA_SIZE, fptr);
-    
-    fclose(fptr);
-    printf("File created and saved successfully\n");
-    
-    FILE * fptr2;
-    fptr2 = fopen("test2.txt", "w");
-    
-    if(fptr2 == NULL)
+    int num;
+    fscanf(fptr,"%d", &num);
+    printf("Number of elements:%d\n", num);
+    int* arr = new int[num];
+    int sum=0;
+    for(int i=0;i<num;i++)
     {
-        printf("Unable to create file.\n");
-        exit(EXIT_FAILURE);
+        fscanf(fptr,"%d",&arr[num]);
+            sum +=arr[num];
     }
-    fputs(data, fptr2);
-    fclose(fptr2);
+    
+    int i=0;
+
+    printf("Sum of numbers is: %i\n", sum);
+    fclose(fptr);
+    printf("File read succesfully\n");
+    delete [] arr;   
     return 0;
 }
