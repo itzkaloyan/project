@@ -11,20 +11,23 @@ int main()
     }
     int num;
     fscanf(fptr,"%d", &num);
-    printf("Number of elements:%d\n", num);
-    int* arr = new int[num];
-    int sum=0;
-    for(int i=0;i<num;i++)
-    {
-        fscanf(fptr,"%d",&arr[num]);
-            sum +=arr[num];
-    }
+    printf("Number of lines:%d\n", num);
     
-    int i=0;
+    int sum=0;
+    int Fnum=0;
+    int Snum=0;
+    for(int i = 0; i < num; i++)
+    {
+        int res = fscanf(fptr,"%d %d\n",&Fnum,& Snum);
+        if (res != 2) {
+            printf("Invalid input line %d\n", i);
+            continue;
+        }
+        sum=Fnum+Snum;
+        printf("Sum of numbers is: %i\n", sum); 
 
-    printf("Sum of numbers is: %i\n", sum);
+    }
     fclose(fptr);
-    printf("File read succesfully\n");
-    delete [] arr;   
+    printf("File read succesfully\n");   
     return 0;
 }
