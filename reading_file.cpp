@@ -32,29 +32,32 @@ int main()
         exit(EXIT_FAILURE);
     }
     fscanf(fptr,"%d", &n);//n = 6 => 6 lines
-    //for(int i = 0; i < n; i++)//looping n times
+    for(int i = 0; i < n; i++)//looping n times
     {
         float sum=0;
         fscanf(fptr,"%d",&m);//scanning the first number of the line to define line lenght
         fgets(num,numChars,fptr);//reading from num, numChars=max chars readable
+        int q=0;
+        while(num[q] == ' ') {
+            q++;
+        }
         float currentNum=0;
-        sscanf(num,"%f", &currentNum);//reading the array num 
-        for (int l=0;l<numChars;l++) {
+        char* p = &num[q];
+        for (int l=q;l<numChars;l++) {
             const char ab = num[l];
-            if(num[l]=='\0'){
+            if(ab=='\0'){
                 break;
             }
-            else if(num[l]==' '&&num[l]=='\n'){
-                sum += currentNum;//finding the sum of a single line
-                if(currentNum=' '){
-                    currentNum=0;
-                }
+            else if(ab==' ' || ab=='\n'){
+
+                sscanf(p,"%f", &currentNum);//reading the array num 
+                sum += currentNum;//finding the sum of a single line   
+                p = &num[l+1];     
             }
-            printf("%f ",currentNum);
-            
+            currentNum=0;
         }
         float avg=sum/float(m);//finding average of a single line
-        printf("Avg of the line is:%f\n",avg);
+        printf("Avg of the line is:%.2f\n",avg);
     }
     fclose(fptr);
     return 0;
