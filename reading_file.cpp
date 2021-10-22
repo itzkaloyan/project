@@ -1,13 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int Getstringlength(char* str) {
+char* GetLine(char * line) {
     int n;
-    while (str[n] != '\0')
-    {
+    while (line[n] != '\0'){
         n++;
     }
-    return n;
+    for(int i=0;i<n;i++){
+        scanf("%c",line);
+        return line;
+    }
 }
 int main()
 {
@@ -18,16 +20,8 @@ int main()
         printf("Unable to open file.\n");
         exit(EXIT_FAILURE);
     }
-   
-    char lett[256];
-    fscanf(fptr,"%s",lett); 
-    int i=Getstringlength(lett);
-    for(int j=0;j<(i/2);j++){
-        char c=lett[j];
-        lett[j]=lett[i-j-1];
-        lett[i-j-1]=c;
-    }
-    printf("Output = %s\n", lett);
-    fclose(fptr);
+    char line[256];
+    GetLine(line);
+    printf("%s\n",line);
     return 0;
 }
