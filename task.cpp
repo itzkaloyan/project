@@ -1,22 +1,25 @@
 #include <iostream>
 using namespace std;
 int main(){
-    int rows = 1;
+    int rows = 0;
+    int space =0;
+    int line = 0;
     printf("Enter number of rows:\n");
     scanf("%d",&rows);
-    for(int i=0;i<=rows;i++){
-            for(int space = rows-1;space >= i;space--){
-                printf(" ");
-            }
-            for(int j=1; j<=i; j++){
-            printf("*");
-            }
+    for(int i=0;i<rows;i++){
+        for (line = i; line <= rows; line++){
             printf(" ");
-            for(int j=1;j<=i;j++){
-                printf("*");
-            }
-
-            printf("\n");
-    }
+        }
+        printf("/");
+        for (space=0;space<i+i;space++){
+            printf(" ");
+        }
+        if(line > space){
+            printf("_");
+        }
+        printf("\\");
+        printf("\n");
+        
+    }  
     return 0;
 }
