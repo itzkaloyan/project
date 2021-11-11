@@ -1,37 +1,69 @@
-#include <stdio.h>
 #include <iostream>
 using namespace std;
-void box(int n,int m,int map[256][256]);
+
+void box(int n, int m, char map[256][256], int posX, int posY, FILE * fptr);
+void print(char map[256][256]);
+
 int main()
 {
-    int n;
-    int m;
-    int map[256][256];
-    do{
-        cout << "Enter n:\n";
-        cin >> n;
+    system("stty cooked");
+    int n = 22;
+    int m = 10;
+    char map[256][256];
+    FILE * fptr;
+    fptr = fopen("test.txt", "r");
+    if(fptr == NULL)
+    {
+        printf("Unable to open file.\n");
+        exit(EXIT_FAILURE);
     }
-    while(n<0&&n>=256);
-    do{
-        cout << "Enter m:\n";
-        cin >> m;
+    int posX;
+    int posY;
+    fscanf(fptr,"%d %d\n", &posX, &posY);
+    if(posX>=n||posY>=m){
+        cout << "Wrong info\n";
+        return 0;
     }
-    while(m<0&&m>=256);
-    box(n,m,map);
+    char ch;
+    system("stty raw");
+    
+    box(n, m, map, posX, posY, fptr);
+    
+    while ((ch = getchar()) != 'e') {
+        print(map);
+        if ((ch == 'w' || ch == 'W') && map[posX][posY-1] != '#'){
+            posY -= 1;
+        }
+        if ((ch == 's' || ch == 'S') && map[posX][posY+1] != '#'){
+            posY += 1;
+        }
+        if ((ch == 'a' || ch == 'A') && map[posX-1][posY] != '#'){
+            posX -= 1;
+        }
+        if ((ch == 'd' || ch == 'D') && map[posX+1][posY] != '#'){
+            posX += 1;
+        }
+        system("clear");
+    }
+    system("stty cooked");
     return 0;
 }
-void box(int n, int m,int map[256][256]){
-    for(int i=0;i<n;i++){
-        for(int y=0;y<m;y++){
-        if(i==n-1||i==0||y==0||y==m-1){
-            map[n][m]='#';
+void box(int n, int m, char map[256][256], int posX, int posY, FILE * fptr)
+{
+    printf("\n\r");
+    int i = 0;
+    map[posX][posY+1]= '@';
+    for (i; i < 200; i++)
+    {
+        char * c = fgets(map[i],200,fptr);
+        if(c == 0){
+            break;
         }
-        else{
-            map[n][m]=' ';
-        }
-        printf("%c", map[n][m]);
-        }
-        printf("\n");
     }
-    
 }
+void print(char map[256][256]){
+    for(int i; i < 200; i++){
+    printf("%d %s\r", i, map[i]);
+    }
+}
+
