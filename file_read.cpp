@@ -1,67 +1,70 @@
 #include <iostream>
 using namespace std;
 
-void box(int n, int m, int map[256][256], int posX, int posY);
+void draw(char map[256][256]);
 
-int main()
-{
+int main() {
     system("stty cooked");
-    int n;
-    int m;
-    int map[256][256];
-    do
+    FILE * fptr;
+    fptr = fopen("./test.txt", "r");
+    if(fptr == NULL)
     {
-        cout << "Enter n:\n";
-        cin >> n;
-    } while (n < 0 && n >= 256);
-    do
+        printf("Unable to open file.\n");
+        exit(EXIT_FAILURE);
+    }
+    int h = 0;
+    int w = 0;
+    char map[256][256];
+    int posX;
+    int posY;
+    fscanf(fptr,"%d %d\n", &posX, &posY);
+    for (int i = 0; i < 200; i++)
     {
-        cout << "Enter m:\n";
-        cin >> m;
-    } while (m < 0 && m >= 256);
-    int posX = n / 2;
-    int posY = m / 2;
+        char * c = fgets(map[i],200,fptr);
+        if(c == 0) {
+            break;
+        }
+    }
+    for (short i = 0; i < 256; i++)
+    {
+        if (map[i][0] == '#') h++;
+    }
+    for (short i = 0; i < 256; i++)
+    {
+        if (map[0][i] == '#') w++;
+    }
+    printf("Size: h: %d w: %d \n", h, w);
+    if(posX>=w || posY>=h) {
+        cout << "Wrong info\n";
+        return EXIT_FAILURE;
+    }
     char ch;
-    system("stty raw");
-    while ((ch = getchar()) != 'e') {
-        system("stty cooked");
+    while ((ch = getchar()) != '\e')
+    {
+        system("stty raw");
         system("clear");
-        if ((ch == 'w' || ch == 'W') && posY != 1) posY -= 1;
-        if ((ch == 's' || ch == 'S') && posY != m-2) posY += 1;
-        if ((ch == 'a' || ch == 'A') && posX != 1) posX -= 1;
-        if ((ch == 'd' || ch == 'D') && posX != n-2) posX += 1;
-        box(n, m, map, posX, posY);
-        system("stty raw"); 
-        cout << endl;
+        map[posY][posX] = ' ';
+        switch (ch) {
+            case 'W': case 'w':
+            if (map[posY-1][posX] != '#') posY--;
+            break;
+            case 'S': case 's':
+            if (map[posY+1][posX] != '#') posY++;
+            break;
+            case 'A': case 'a':
+            if (map[posY][posX-1] != '#') posX--;
+            break;
+            case 'D': case 'd':
+            if (map[posY][posX+1] != '#') posX++;
+            break;
+        }
+        map[posY][posX] = '@';
+        draw(map);
     }
     system("stty cooked");
     return 0;
 }
-
-void box(int n, int m, int map[256][256], int posX, int posY)
-{
-    printf("\n");
-    for (int i = 0; i < n; i++)
-    {
-        for (int y = 0; y < m; y++)
-        {
-            if (i == n - 1 || i == 0 || y == 0 || y == m - 1)
-            {
-                map[n][m] = '#';
-            }
-            else
-            {
-                if (i == posY && y == posX)
-                {
-                    map[n][m] = '@';
-                }
-                else
-                {
-                    map[n][m] = ' ';
-                }
-            }
-            printf("%c", map[n][m]);
-        }
-        printf("\n");
-    }
+void draw(char map[256][256]) {
+    for (size_t i = 0; i < 200; i++)
+       printf("%s \r", map[i]);
 }
