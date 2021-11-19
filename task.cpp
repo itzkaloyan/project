@@ -1,37 +1,36 @@
-#include <iostream>
+#include<bits/stdc++.h>
+#include<iostream>
 using namespace std;
-void firstline(int rows);
-void lastline(int rows);
-void midlines(int rows);
-int main(){
-    int rows;
-    cout << "Enter length:\n";
-    cin >> rows;
-    firstline(rows);
-    midlines(rows);
-    lastline(rows);
+  
+void line(int x1, int y1, int x2, int y2)
+{
+   int m_new = 2 * (y2 - y1);
+   int nextY = m_new - (x2 - x1);
+   for (int x = x1, y = y1; x <= x2-1; x++)
+   {
+      cout << "(" << x << "," << y << ")\n";
+
+      nextY += m_new;
+
+      if (nextY >= 0)
+      {
+         y++;
+         nextY -= 2 * (x2 - x1);
+      }
+   }
+   cout << "(" << x2 << "," << y2 << ")\n";
+}
+  
+int main()
+{
+    int x1;
+    int y1;
+    int x2;
+    int y2;
+    cout<<"Enter starting point of the line:"<<endl;
+    cin>>x1>>y1;
+    cout<<"Enter ending point of the line:"<<endl;
+    cin>>x2>>y2;
+    line(x1, y1, x2, y2);
     return 0;
-}
-void firstline(int rows){
-    for(int i=0;i<rows-1;i++){
-        cout << " ";
-    }
-    for(int i=0;i<rows;i++){
-        cout << "* ";
-    }
-    cout << endl;
-}
-void midlines(int rows){
-    for(int i=1; i<rows-1; i++){
-        for(int j=0;j<i+1;j++){
-            cout << " ";
-        }
-        cout << "*";
-        cout << endl;
-    }
-}
-void lastline(int rows){
-    for(int i=0;i<rows+rows-1;i++){
-        cout << "* ";
-    }
 }
