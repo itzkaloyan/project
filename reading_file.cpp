@@ -1,50 +1,117 @@
-#include <bits/stdc++.h>
+#include <iostream>
 using namespace std;
 
-int dayofweek(int d,int m,int  y){
-    static int t[] = { 0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4 };
-    y -= m < 3;
-    int x=( y + y / 4 - y / 100 +y / 400 + t[m - 1] + d) % 7;
-    return x;
-}
-int main(){
-    int d;
-    int m;
-    int y;
-    printf("Input a valid date:\n");
-    scanf("%d %d %d",&d,&m,&y);
-    int x = dayofweek(d, m, y);
-    if(d<=31&&d>0&&m<=12&&m>0){
-        switch (x){
-                case 0:
-                    printf ("Sunday");
-                    break;
-                case 1:
-                    printf ("Monday");
-                    break;
-                case 2:
-                    printf ("Tuesday");
-                    break;
-                case 3:
-                    printf ("Wednesday");
-                    break;
-                case 4:
-                    printf ("Thursday");
-                    break;
-                case 5:
-                    printf ("Friday");
-                    break;
-                case 6:
-                    printf ("Saturday");
-                    break;
-                default:
-                    printf ("Error");
-        
-        }
-        
+void print(char map[16][16], int &r){
+    for (int i = 0; i <= r*r; i++){
+        for(int j =0; j <= r*r; j++)
+        {
+        printf("%c", map[i][j]);
     }
-    else {
-            printf ("Invalid date");
-            }
-    return 0;
+    printf("\n");
+    }
 }
+
+void drawline(char map[16][16],int x1, int y1,int x2,int y2)  
+{  
+    int dx, dy, p, x, y; 
+    dx=x2-x1;  
+    dy=y2-y1;  
+    x=x1;  
+    y=y1;  
+    p=2*dy-dx;
+    if(dx>=0&&dy>=0){
+        cout<<"Kvadrant 1";
+        while(x<x2)
+        {  
+            map[x][y]='#';
+            if(p>=0)  
+            {  
+                y+=1;  
+                p=p+2*dy-2*dx; 
+                x+=1;
+            }  
+            else  
+            {  
+                p=p+2*dy; 
+                x+=1;  
+            }
+        }
+    }
+    if(dx<0&&dy>=0){
+        cout<<"Kvadrant 2";
+        while(x2<x)
+        {
+            map[x][y]='#';
+            if(p>=0)  
+            {  
+                y+=1;  
+                p=p+2*dy+2*dx; 
+                x-=1;
+            }  
+            else  
+            {  
+                p=p+2*dy; 
+                x-=1;  
+            }
+        }
+    }
+    if(dx<0&&dy<0){
+        cout<<"Kvadrant 3";
+        while(x2<x)
+        {
+            map[x][y]='#';
+            if(p>=0)  
+            {  
+                y-=1;  
+                p=p+2*dy+2*dx; 
+                x-=1;
+            }  
+            else  
+            {  
+                p=p+2*dy; 
+                x-=1;  
+            }
+        }
+    }
+    if(dx>=0&&dy<0){
+        cout<<"Kvadrant 4";
+        while(x<x2)
+        {
+            map[x][y]='#';
+            if(p>=0)  
+            {  
+                y-=1;  
+                p=p+2*dy-2*dx; 
+                x+=1;
+            }  
+            else  
+            {  
+                p=p+2*dy; 
+                x+=1;  
+            }
+        }
+    }
+}
+
+int main(){
+    int r;
+    int x2;
+    int y2;
+    cout<<"enter ending point";
+    cin>>x2>>y2;
+    cout<<"enter radius:";
+    cin>>r;
+    int x1 = r;
+    int y1 = r;
+    char map[16][16];
+    for (int i = 0; i <= r*r; i++){
+        for(int j =0; j <= r*r; j++){
+            map[i][j]=' ';
+        }
+    }
+    map[x1][y1] = '#';
+    drawline(map,x1,y1,x2,y2);
+    print(map,r);
+
+}
+
