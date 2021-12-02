@@ -2,47 +2,43 @@
 using namespace std;
 
 int main(){
-   bool ssd;
    int price;
-   int ram;
+   bool ac;
+   int speed;
    int usb;
+   cout<<"Enter price:";
+   cin>>price;
+   cout<<"Enter max speed:";
+   cin>>speed;
    cout<<"Enter number of USBs:";
    cin>>usb;
-   cout<<"Enter Price:";
-   cin>>price;
-   cout<<"Enter gb of RAM:";
-   cin>>ram;
-   cout<<"Is there a SSD, 1 for yes, 0 for no:\n";
-   cin>>ssd;
-   if(price>1500){
-      cout<<"Wont buy a laptop";
+   cout<<"Does it support 802.11ac, 1 for yes, 0 for no\n";
+   cin>>ac;
+   if(price>130||price<80&&price>70){
+      cout<<"Won't buy a router";
       return 0;
    }
-   if(price<1000&&price>800){
-      cout<<"Wont buy a laptop";
-      return 0;
-   }
-   if(price>1000){
-      if(usb<3||ram<8||ssd==false){
-         cout<<"Wont buy a laptop";
+   if(price>80){
+      if(ac==false||speed<200||usb<2){
+         cout<<"Won't buy a router";
          return 0;
       }
       else{
-         cout<<"Will buy a laptop with "<<ram<<" RAM, with SSD and "<<usb<<" USB ports";
+         cout<<"Will buy a router with "<<speed<<" Mbps max speed, 802.11ac support and "<<usb<<" USB ports";
          return 0;
       }
    }
-   if(price<800){
-      if(usb<3){
-         cout<<"Wont buy a laptop";
+   else{
+      if(usb<2){
+         cout<<"Won't buy a router";
          return 0;
       }
-      else if(ssd==true){
-         cout<<"Will buy a laptop with "<<ram<<" RAM, with SSD and "<<usb<<" USB ports";
+      else if(ac==false){
+         cout<<"Will buy a router with "<<speed<<" Mbps max speed, without 802.11ac support and "<<usb<<" USB ports";
          return 0;
       }
       else{
-         cout<<"Will buy a laptop with "<<ram<<" RAM, without SSD and "<<usb<<" USB ports";
+         cout<<"Will buy a router with "<<speed<<" Mbps max speed, 802.11ac support and "<<usb<<" USB ports";
          return 0;
       }
    }
