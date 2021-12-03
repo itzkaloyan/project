@@ -4,7 +4,7 @@ int main()
 {
     int n=0;
     int m=0;
-    int num=0;
+    float num[100];
     FILE * fptr;
     fptr = fopen("test.txt", "r");
     if(fptr == NULL)
@@ -18,7 +18,7 @@ int main()
         int sum=0;
         fscanf(fptr,"%d",&m);
         for (int l=0;l<m;l++) {
-            fscanf(fptr, "%d",&num);
+            fgets(num[],m,fptr);
             sum +=num;
         }
         float avg=sum/float(m);

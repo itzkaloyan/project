@@ -19,7 +19,8 @@ void drawline(char map[16][16],int x1, int y1,int x2,int y2)
     x=x1;  
     y=y1;  
     p=2*dy-dx;
-    if(dx>=0&&dy>=0){
+    if(dx>=0&&dy>=0)
+    {
         cout<<"Kvadrant 1";
         while(x<x2)
         {  
@@ -37,7 +38,8 @@ void drawline(char map[16][16],int x1, int y1,int x2,int y2)
             }
         }
     }
-    if(dx<0&&dy>=0){
+    if(dx<0&&dy>=0)
+    {
         cout<<"Kvadrant 2";
         while(x2<x)
         {
@@ -55,7 +57,8 @@ void drawline(char map[16][16],int x1, int y1,int x2,int y2)
             }
         }
     }
-    if(dx<0&&dy<0){
+    if(dx<0&&dy<0)
+    {
         cout<<"Kvadrant 3";
         while(x2<x)
         {
@@ -73,7 +76,8 @@ void drawline(char map[16][16],int x1, int y1,int x2,int y2)
             }
         }
     }
-    if(dx>=0&&dy<0){
+    if(dx>=0&&dy<0)
+    {
         cout<<"Kvadrant 4";
         while(x<x2)
         {
@@ -112,6 +116,5 @@ int main(){
     map[x1][y1] = '#';
     drawline(map,x1,y1,x2,y2);
     print(map,r);
-
 }
 

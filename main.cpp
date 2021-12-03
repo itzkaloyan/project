@@ -1,7 +1,8 @@
 #include <iostream>
+#include <math.h>
 using namespace std;
 
-void draw(char map[256][256], int h);
+void draw(char map[256][256], int h, int w,int posX, int posY,int rad);
 
 int main() {
     system("stty cooked");
@@ -17,6 +18,7 @@ int main() {
     char map[256][256];
     int posX;
     int posY;
+    int rad;
     fscanf(fptr,"%d %d\n", &posX, &posY);
     for (int i = 0; i < 200; i++)
     {
@@ -56,12 +58,31 @@ int main() {
             break;
         }
         map[posY][posX] = '@';
-        draw(map,h);
+        draw(map,h,w,posX,posY,rad);
     }
     system("stty cooked");
     return 0;
 }
-void draw(char map[256][256], int h) {
-    for (int i = 0; i < h; i++)
-       printf("%s \r", map[i]);
+void draw(char map[256][256], int h, int w,int posX, int posY,int rad) {
+    char display[256][256];
+            for (int i = 0; i < 256; i++)
+            {
+                display[i];
+                for (int index = 0; index < sizeof(display[i]); index++)
+                {
+                    display[i][index] = ' ';
+                }
+            }
+            for (int x = -rad; x < rad; x++)
+            {
+                int height = sqrt(rad*rad - x*x);
+                for (int y = -height*2; y < height*2; y++){
+                    display[x + posX][y + posY] = map[x + posX][y + posY];
+                }
+
+            }
+            for(int i = 0;i < h;i++){
+                printf("%s \r", display[i]);
+            }
+           
 }
