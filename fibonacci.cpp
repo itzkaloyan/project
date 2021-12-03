@@ -2,7 +2,6 @@
 #include <stdlib.h>
 int main()
 {
-    printf("%d %d\n", sizeof(long long),sizeof(float));
     int n=0;
     int m=0;
     int num=0;
@@ -23,7 +22,7 @@ int main()
             sum +=num;
         }
         float avg=sum/float(m);
-        printf("Avg of the line is:%d %f %d\n",avg, sum, m);
+        printf("Avg of the line is:%f %d %d\n",avg, sum, m);
     }
     fclose(fptr);  
     return 0;
