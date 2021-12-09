@@ -1,2 +1,2 @@
 project(Files)
-add_executable(Git Traicho.cpp)
+add_executable(Git main.cpp)

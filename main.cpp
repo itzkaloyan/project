@@ -65,24 +65,23 @@ int main() {
 }
 void draw(char map[256][256], int h, int w,int posX, int posY,int rad) {
     char display[256][256];
-            for (int i = 0; i < 256; i++)
+        for (int i = 0; i < 256; i++)
+        {
+            display[i];
+            for (int index = 0; index < sizeof(display[i]); index++)
             {
-                display[i];
-                for (int index = 0; index < sizeof(display[i]); index++)
-                {
-                    display[i][index] = ' ';
-                }
+                display[i][index] = ' ';
             }
-            for (int x = -rad; x < rad; x++)
-            {
-                int height = sqrt(rad*rad - x*x);
-                for (int y = -height*2; y < height*2; y++){
-                    display[x + posX][y + posY] = map[x + posX][y + posY];
-                }
-
+        }
+        for (int x = -rad; x < rad; x++)
+        {
+            int height = sqrt(rad*rad - x*x);
+            for (int y = -height*2; y < height*2; y++){
+                display[x + posX][y + posY] = map[x + posX][y + posY];
             }
-            for(int i = 0;i < h;i++){
-                printf("%s \r", display[i]);
-            }
+        }
+        for(int i = 0;i < h;i++){
+            printf("%s \r", display[i]);
+        }
            
 }
